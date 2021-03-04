@@ -57,7 +57,7 @@ btnRoll.addEventListener('click', function(){
         //switch to next player iff dice is a one
         //keep track of which player is active player when dice was rolled
         //reset current score text content to 0 before switching active player
-        document.getElementId(`current--${activePlayer}`).textContent = 0;
+        document.getElementById(`current--${activePlayer}`).textContent = 0;
         //current score not bound to a player
         currentScore = 0;
         //if active player 0 switch to 1 if 1 switch to 0
@@ -65,7 +65,7 @@ btnRoll.addEventListener('click', function(){
        //toggle active player class
         //if there will remove if not there will add
         player0El.classList.toggle('player--active');
-        player0El.classList.toggle('player--active');
+        player1El.classList.toggle('player--active');
 
     }
 });
