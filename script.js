@@ -1,5 +1,7 @@
 'use strict';
 //select dom elements
+const player0El = document.querySelector('.player--0');
+const player1El = document.querySelector('.player--1');
 const score0El = document.querySelector('#score--0');
 const score1El = document.getElementById('score--1');
 //don't need to enter hash
@@ -54,9 +56,17 @@ btnRoll.addEventListener('click', function(){
     } else {
         //switch to next player iff dice is a one
         //keep track of which player is active player when dice was rolled
+        //reset current score text content to 0 before switching active player
+        document.getElementId(`current--${activePlayer}`).textContent = 0;
+        //current score not bound to a player
+        currentScore = 0;
         //if active player 0 switch to 1 if 1 switch to 0
         activePlayer = activePlayer === 0 ? 1 : 0;
-        
+       //toggle active player class
+        //if there will remove if not there will add
+        player0El.classList.toggle('player--active');
+        player0El.classList.toggle('player--active');
+
     }
 });
 
