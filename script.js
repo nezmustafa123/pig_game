@@ -26,8 +26,11 @@ diceEl.classList.add('hidden');
 //if not one add to current
 //if click hold add to total
 
+const scores = [0,0];
+//start with zerp on both(big scores)
 let currentScore = 0;
-
+let activePlayer = 0;
+//player 1 is 0 player 2 is 1 because of array 0 indexed
 
 btnRoll.addEventListener('click', function(){
     //1. generate new random dice roll 1-6
@@ -43,12 +46,17 @@ btnRoll.addEventListener('click', function(){
         //add dice to current score
         currentScore += dice;
         //add score to element text content
-        current0El.textContent = currentScore; //change later
+        //select score dynamically based off active player
+        document.getElementById(`current--${activePlayer}`).textContent = currentScore;
+//        current0El.textContent = currentScore; //change later
         
         
     } else {
-        //switch to next player
-        //
+        //switch to next player iff dice is a one
+        //keep track of which player is active player when dice was rolled
+        //if active player 0 switch to 1 if 1 switch to 0
+        activePlayer = activePlayer === 0 ? 1 : 0;
+        
     }
 });
 
