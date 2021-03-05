@@ -34,10 +34,27 @@ let currentScore = 0;
 let activePlayer = 0;
 //player 1 is 0 player 2 is 1 because of array 0 indexed
 
+
+//switch player function without parameters reusable
+const switchPlayer = function() {
+    //set 
+    document.getElementById(`current--${activePlayer}`).textContent = 0;
+        //current score not bound to a player
+        currentScore = 0;
+        //if active player 0 switch to 1 if 1 switch to 0
+        activePlayer = activePlayer === 0 ? 1 : 0;
+       //toggle active player class
+        //if there is a class remove if not it will add
+        player0El.classList.toggle('player--active');
+        player1El.classList.toggle('player--active');
+};
+
+
+//roll dice
 btnRoll.addEventListener('click', function(){
     //1. generate new random dice roll 1-6
     const dice = Math.trunc(Math.random() * 6) + 1;
-    console.log(dice);
+//    console.log(dice);
     //2. display dice
     diceEl.classList.remove('hidden');
     //dice image source use source property
@@ -54,19 +71,29 @@ btnRoll.addEventListener('click', function(){
         
         
     } else {
-        //switch to next player iff dice is a one
-        //keep track of which player is active player when dice was rolled
-        //reset current score text content to 0 before switching active player
-        document.getElementById(`current--${activePlayer}`).textContent = 0;
-        //current score not bound to a player
-        currentScore = 0;
-        //if active player 0 switch to 1 if 1 switch to 0
-        activePlayer = activePlayer === 0 ? 1 : 0;
-       //toggle active player class
-        //if there will remove if not there will add
-        player0El.classList.toggle('player--active');
-        player1El.classList.toggle('player--active');
+        //switch to next player if dice is a one
+       switchPlayer();
 
     }
 });
 
+btnHold.addEventListener('click', function(){
+    //add current score to final score 
+    //1. Add current score to active player's score
+        //use activeplayer variable to get active player score
+
+    scores[activePlayer] += currentScore;
+    // scores[activePlayer] = score[activePlayer] + currentScore;
+    //active player final score is qeual to latest final active player score plus current score
+       console.log(scores[activePlayer]);
+    //set text content to active player score
+    document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
+//    when player is zero will select first score
+    
+   //2.check  if player's score is >=100
+    //finish the game
+    
+    //switch to the next player with function
+    switchPlayer();
+//    console.log(activePlayer);
+});
