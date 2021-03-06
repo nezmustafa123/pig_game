@@ -77,11 +77,13 @@ btnRoll.addEventListener('click', function(){
     }
 });
 
+//add current score to final score
+
 btnHold.addEventListener('click', function(){
     //add current score to final score 
     //1. Add current score to active player's score
         //use activeplayer variable to get active player score
-
+//scoresd at position active player 
     scores[activePlayer] += currentScore;
     // scores[activePlayer] = score[activePlayer] + currentScore;
     //active player final score is qeual to latest final active player score plus current score
@@ -92,8 +94,15 @@ btnHold.addEventListener('click', function(){
     
    //2.check  if player's score is >=100
     //finish the game
-    
-    //switch to the next player with function
+    if(scores[activePlayer] >= 10) {
+        //add winnder class
+        document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+        //remove active player class
+        document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+    } else {
+//    switch to the next player with function
     switchPlayer();
 //    console.log(activePlayer);
+    }
+    
 });
