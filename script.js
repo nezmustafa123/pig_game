@@ -33,7 +33,7 @@ const scores = [0,0];
 let currentScore = 0;
 let activePlayer = 0;
 //player 1 is 0 player 2 is 1 because of array 0 indexed
-
+let playing = true;
 
 //switch player function without parameters reusable
 const switchPlayer = function() {
@@ -52,6 +52,7 @@ const switchPlayer = function() {
 
 //roll dice
 btnRoll.addEventListener('click', function(){
+    if(playing) {//if true
     //1. generate new random dice roll 1-6
     const dice = Math.trunc(Math.random() * 6) + 1;
 //    console.log(dice);
@@ -75,11 +76,13 @@ btnRoll.addEventListener('click', function(){
        switchPlayer();
 
     }
+  }
 });
 
 //add current score to final score
 
 btnHold.addEventListener('click', function(){
+    if(playing) {
     //add current score to final score 
     //1. Add current score to active player's score
         //use activeplayer variable to get active player score
@@ -95,7 +98,9 @@ btnHold.addEventListener('click', function(){
    //2.check  if player's score is >=100
     //finish the game
     if(scores[activePlayer] >= 10) {
-        //add winnder class
+        //game playing is false
+        playing = false;
+        //add winner class
         document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
         //remove active player class
         document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
@@ -104,5 +109,6 @@ btnHold.addEventListener('click', function(){
     switchPlayer();
 //    console.log(activePlayer);
     }
+  }
     
 });
