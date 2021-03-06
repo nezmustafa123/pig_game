@@ -14,26 +14,51 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 
 
-//Starting conditions
-score0El.textContent = 0;
-score1El.textContent = 0;
-//will convert numbers to strings
+//init function
+//declare variables outside access from inside function
+let playing, currentScore, activePlayer, scores;
 
-//add hidden class to dice class initially
-diceEl.classList.add('hidden');
+const init = function() {
+    
+    //Starting conditions
 
-//rolling functionality
-//user rolls dice 
-//dice score on screen
-//if not one add to current
-//if click hold add to total
+    //rolling functionality
+    //user rolls dice 
+    //dice score on screen
+    //if not one add to current
+    //if click hold add to total
+    scores = [0,0];
+    //start with zerp on both(big scores)
+    currentScore = 0;
+    activePlayer = 0;
+    //player 1 is 0 player 2 is 1 because of array 0 indexed
+    //will convert numbers to strings
+    playing = true;
+    //add hidden class to dice class initially
+    diceEl.classList.add('hidden');
 
-const scores = [0,0];
-//start with zerp on both(big scores)
-let currentScore = 0;
-let activePlayer = 0;
-//player 1 is 0 player 2 is 1 because of array 0 indexed
-let playing = true;
+    score0El.textContent = 0;
+    score1El.textContent = 0;
+    current0El.textContent = 0;
+    current1El.textContent = 0;
+    
+    scores[activePlayer] = 0;
+    scores[activePlayer-1] = 0;
+    scores[activePlayer+1] = 0;
+    player0El.classList.add('player--active');
+    player1El.classList.remove('player--active');
+//adding class already there won't add another one
+    player0El.classList.remove('player--winner');
+    player1El.classList.remove('player--winner');
+};
+
+init();
+
+
+
+
+
+
 
 //switch player function without parameters reusable
 const switchPlayer = function() {
@@ -48,6 +73,16 @@ const switchPlayer = function() {
         player0El.classList.toggle('player--active');
         player1El.classList.toggle('player--active');
 };
+
+
+
+
+btnNew.addEventListener('click', function(){
+   init();
+
+});
+
+
 
 
 //roll dice
